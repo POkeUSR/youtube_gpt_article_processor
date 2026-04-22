@@ -1,5 +1,4 @@
 from youtube_transcript_api import YouTubeTranscriptApi
-import json
 
 
 def run_simple():
