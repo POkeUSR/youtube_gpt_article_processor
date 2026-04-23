@@ -11,18 +11,39 @@
 
 ## Настройка
 
-```bash
-# 1. Установка зависимостей
-pip install -r requirements.txt
+### Установка зависимостей
 
-# 2. Настройка API ключа
+**Windows:**
+```cmd
+pip install -r requirements.txt
+```
+
+**Linux/Mac:**
+```bash
+pip install -r requirements.txt
+```
+
+### Настройка API ключа
+
+**Windows:**
+```cmd
+copy .env.example .env
+# Отредактируйте .env в любом текстовом редакторе, вставьте ваш OPENAI_API_KEY
+```
+
+**Linux/Mac:**
+```bash
 cp .env.example .env
 # Отредактируйте .env, вставьте ваш OPENAI_API_KEY
+```
 
-# 3. Подготовка файла с текстом
-# Создайте gpt_text.txt в папке со скриптом:
-#   echo "Ваш текст статьи..." > gpt_text.txt
-#   (или скопируйте из parser.py)
+### Подготовка файла с текстом
+
+Создайте файл `gpt_text.txt` в папке со скриптом и поместите в него текст статьи.
+
+**Или используйте парсер для YouTube субтитров:**
+```bash
+python parser.py  # Скачает субтитры и сохранит в gpt_text.txt
 ```
 
 ## Быстрый старт
@@ -39,6 +60,19 @@ Artificial intelligence is no longer science fiction. It's here...
 
 ### Базовое использование
 
+**Windows:**
+```cmd
+# Запуск с файлом gpt_text.txt (ищется в папке со скриптом)
+python gpt_processor.py
+
+# Указать свой файл и папку вывода
+python gpt_processor.py -i my_article.txt -o results/
+
+# Или используйте run_processor.bat для запуска веб-сервера с браузером
+run_processor.bat
+```
+
+**Linux/Mac:**
 ```bash
 # Запуск с файлом gpt_text.txt (ищется в папке со скриптом)
 python gpt_processor.py
@@ -83,17 +117,41 @@ result = processor.process(
 )
 ```
 
+## Веб-интерфейс
+
+Для удобства использования доступен веб-интерфейс на Flask:
+
+```bash
+python app.py
+```
+
+Затем откройте браузер: http://localhost:5000
+
+**Windows:**
+```cmd
+run_processor.bat  # Запускает сервер и открывает браузер автоматически
+```
+
+Веб-интерфейс позволяет:
+- Ввести ссылку на YouTube видео
+- Автоматически скачать субтитры
+- Перевести текст и создать сводку через GPT
+- Скачать результаты в виде файлов
+
 ## Структура проекта
 
 ```
 youtube/
-├── gpt_processor.py      # Основной модуль
+├── app.py                # Веб-интерфейс Flask
+├── gpt_processor.py      # Основной модуль обработки
+├── parser.py             # Парсер YouTube субтитров
+├── test.py               # Тест API
+├── run_processor.bat     # Скрипт запуска для Windows
 ├── requirements.txt       # Зависимости
 ├── .env.example          # Пример конфигурации
 ├── .env                  # Ваш конфиг (НЕ коммитить!)
 ├── README.md             # Этот файл
-├── parser.py             # YouTube субтитры
-└── test.py               # Тест API
+└── output/               # Папка для результатов (создается автоматически)
 ```
 
 ## API Использование
