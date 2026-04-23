@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 from youtube_transcript_api import YouTubeTranscriptApi
 
-URL = "https://www.youtube.com/watch?v=9HNczuxYxvw"
+URL = "https://www.youtube.com/watch?v=LINKYOUTUBE-HERE"
 OUTPUT = "gpt_text.txt"
 
 

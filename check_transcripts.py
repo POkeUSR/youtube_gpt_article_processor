@@ -1,6 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi
 
-video_id = "0lQIcwnyX48"
+video_id = ""
 
 print("=== ВСЕ ДОСТУПНЫЕ СУБТИТРЫ ===")
 for transcript in YouTubeTranscriptApi.list_transcripts(video_id):

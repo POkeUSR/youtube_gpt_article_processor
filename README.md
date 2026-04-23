@@ -1,234 +1,79 @@
-# GPT Article Processor
+████████╗███████╗██╗  ██╗████████╗██╗   ██╗██████╗ ███████╗
+╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝██║   ██║██╔══██╗██╔════╝
+   ██║   █████╗   ╚███╔╝    ██║   ██║   ██║██████╔╝█████╗  
+   ██║   ██╔══╝   ██╔██╗    ██║   ██║   ██║██╔══██╗██╔══╝  
+   ██║   ███████╗██╔╝ ██╗   ██║   ╚██████╔╝██████╔╝███████╗
+   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝
+                                                            
+░▒▓█ SHADOW EDITION █▓▒░
+▓▒░ AI YouTube Translation & Summary Platform ░▒▓
 
-Модуль для автоматической обработки текстовых статей с помощью OpenAI GPT. Автоматически переводит статьи и создает краткие сводки.
+Youtube GPT Article Processor
 
-## Возможности
+Автоматизированный инструмент для перевода и суммаризации статей и YouTube-видео
+с помощью OpenAI GPT.
 
-- **Перевод**: Полный перевод статьи на любой язык с сохранением структуры
-- **Суммирование**: Извлечение 5-7 ключевых тезисов в виде маркированного списка **на русском языке**
-- **Автоматическое сохранение**: Результаты сохраняются в `translated_article.txt` и `summary_article.txt`
-- **Гибкая настройка**: Выбор модели, языка перевода, директории вывода
+++ Быстрый старт (Веб-интерфейс)
 
-## Настройка
+Самый простой способ использовать программу — запустить веб-панель. Она
+позволяет вставить ссылку на YouTube и сразу получить результат.
 
-### Установка зависимостей
+Запуск:
 
-**Windows:**
-```cmd
+  - Windows: Просто запустите файл run_processor.bat.
+  - Linux/Mac: Выполните python app.py в терминале.
+
+Как пользоваться:
+
+1.  Откройте в браузере: http://localhost:5000.
+2.  Вставьте ссылку на YouTube видео или текст.
+3.  Нажмите "🚀 Обработать".
+4.  По завершении скачайте готовый перевод (translated_article.txt) и краткую
+    сводку (summary_article.txt).
+
+Возможности
+
+  - YouTube Parser: Автоматическое извлечение субтитров из видео.
+  - Умный перевод: Полный перевод текста на русский (или любой другой) язык.
+  - Саммаризация: Создание 5-7 ключевых тезисов статьи на русском языке.
+  - Работа с длинными текстами: Автоматическое разбиение больших статей на части
+    для обхода лимитов GPT.
+
+Настройка
+
+1. Установка
+
+Убедитесь, что у вас установлен Python 3.8+.
+
 pip install -r requirements.txt
-```
 
-**Linux/Mac:**
-```bash
-pip install -r requirements.txt
-```
+2. Настройка API ключа
 
-### Настройка API ключа
+1.  Скопируйте файл .env.example и назовите его .env.
+2.  Откройте .env и вставьте ваш ключ OpenAI: OPENAI_API_KEY=ваш_ключ_здесь
 
-**Windows:**
-```cmd
-copy .env.example .env
-# Отредактируйте .env в любом текстовом редакторе, вставьте ваш OPENAI_API_KEY
-```
+Использование через консоль (CLI)
 
-**Linux/Mac:**
-```bash
-cp .env.example .env
-# Отредактируйте .env, вставьте ваш OPENAI_API_KEY
-```
+Если вам не нужен веб-интерфейс, вы можете использовать скрипты напрямую:
 
-### Подготовка файла с текстом
+  - Обработка текста из файла: Положите текст в gpt_text.txt и запустите:
+    python gpt_processor.py
+  - Скачивание субтитров YouTube отдельно:
+    python parser.py
 
-Создайте файл `gpt_text.txt` в папке со скриптом и поместите в него текст статьи.
+Структура проекта
 
-**Или используйте парсер для YouTube субтитров:**
-```bash
-python parser.py  # Скачает субтитры и сохранит в gpt_text.txt
-```
+  - app.py — веб-интерфейс (Flask).
+  - gpt_processor.py — логика работы с OpenAI.
+  - parser.py — модуль получения текста из YouTube.
+  - output/ — папка, где сохраняются все результаты.
+  - run_processor.bat — быстрый запуск для Windows.
 
-## Быстрый старт
+Требования
 
-### Подготовка файла
+  - Ключ OpenAI API.
+  - Установленные зависимости из requirements.txt.
+  - Для работы с YouTube может потребоваться VPN, если доступ к сервису
+    ограничен в вашем регионе.
 
-Создайте файл `gpt_text.txt` **в той же папке, что и скрипт** `gpt_processor.py`, и поместите в него текст статьи:
-
-```
-The Rise of Artificial Intelligence: What You Need to Know
-
-Artificial intelligence is no longer science fiction. It's here...
-```
-
-### Базовое использование
-
-**Windows:**
-```cmd
-# Запуск с файлом gpt_text.txt (ищется в папке со скриптом)
-python gpt_processor.py
-
-# Указать свой файл и папку вывода
-python gpt_processor.py -i my_article.txt -o results/
-
-# Или используйте run_processor.bat для запуска веб-сервера с браузером
-run_processor.bat
-```
-
-**Linux/Mac:**
-```bash
-# Запуск с файлом gpt_text.txt (ищется в папке со скриптом)
-python gpt_processor.py
-
-# Указать свой файл и папку вывода
-python gpt_processor.py -i my_article.txt -o results/
-```
-
-### В коде
-
-```python
-from gpt_processor import GPTArticleProcessor
-
-# Читаем файл
-from pathlib import Path
-text = Path('gpt_text.txt').read_text(encoding='utf-8')
-
-processor = GPTArticleProcessor()
-result = processor.process(text, output_dir='output/')
-# Файлы: output/translated_article.txt, output/summary_article.txt
-```
-
-## Настройки
-
-### Конструктор класса
-
-```python
-GPTArticleProcessor(
-    api_key=None,           # API ключ (если None, берется из .env)
-    model="gpt-4o-mini",   # модель: gpt-4o-mini, gpt-4o, gpt-4-turbo
-    target_language="ru"   # язык перевода по умолчанию
-)
-```
-
-### Параметры метода `process()`
-
-```python
-result = processor.process(
-    text="Текст статьи...",
-    output_dir=Path("результаты/"),  # папка для сохранения
-    translate_to="es"                # перевести на испанский
-)
-```
-
-## Веб-интерфейс
-
-Для удобства использования доступен веб-интерфейс на Flask:
-
-```bash
-python app.py
-```
-
-Затем откройте браузер: http://localhost:5000
-
-**Windows:**
-```cmd
-run_processor.bat  # Запускает сервер и открывает браузер автоматически
-```
-
-Веб-интерфейс позволяет:
-- Ввести ссылку на YouTube видео
-- Автоматически скачать субтитры
-- Перевести текст и создать сводку через GPT
-- Скачать результаты в виде файлов
-
-## Структура проекта
-
-```
-youtube/
-├── app.py                # Веб-интерфейс Flask
-├── gpt_processor.py      # Основной модуль обработки
-├── parser.py             # Парсер YouTube субтитров
-├── test.py               # Тест API
-├── run_processor.bat     # Скрипт запуска для Windows
-├── requirements.txt       # Зависимости
-├── .env.example          # Пример конфигурации
-├── .env                  # Ваш конфиг (НЕ коммитить!)
-├── README.md             # Этот файл
-└── output/               # Папка для результатов (создается автоматически)
-```
-
-## API Использование
-
-### Класс `GPTArticleProcessor`
-
-**Методы:**
-- `translate(text, language=None)` — перевод текста
-- `summarize(text)` — создание сводки (всегда на русском)
-- `process(text, output_dir=None, translate_to=None)` — полная обработка
-
-**Возвращает:** `ProcessingResult` с полями:
-- `original_text` — исходный текст
-- `translated_text` — переведенный текст
-- `summary_text` — сводка-список
-- `target_language` — язык перевода
-
-## Обработка ошибок
-
-```python
-from gpt_processor import GPTArticleProcessor
-from dotenv import dotenv_values
-
-try:
-    processor = GPTArticleProcessor()
-    result = processor.process(article_text)
-except ValueError as e:
-    print(f"Ошибка конфигурации: {e}")
-except RuntimeError as e:
-    print(f"Ошибка API: {e}")
-```
-
-Распознаваемые ошибки:
-- `ValueError` — пустой текст, отсутствует API ключ
-- `RuntimeError` — ошибки API (лимиты, подключение, авторизация)
-
-## Безопасность
-
-- **Никогда не хардкодите API ключ** — используйте `.env` файл
-- Добавьте `.env` в `.gitignore`:
-  ```
-  # .gitignore
-  .env
-  __pycache__/
-  *.pyc
-  ```
-- Потребуйте минимальные права API ключа (только chat completions)
-
-## Тонкая настройка
-
-### Смена промптов
-
-```python
-class CustomProcessor(GPTArticleProcessor):
-    SUMMARY_PROMPT = "Ваш кастомный промпт для сводки..."
-    TRANSLATION_PROMPT = "Ваш промпт для перевода..."
-```
-
-### Пакетная обработка
-
-```python
-from pathlib import Path
-
-processor = GPTArticleProcessor()
-
-for article_file in Path("articles/").glob("*.txt"):
-    text = article_file.read_text(encoding="utf-8")
-    result = processor.process(text, output_dir=f"output/{article_file.stem}")
-    print(f"Обработано: {article_file.name}")
-```
-
-## Требования
-
-- Python 3.8+
-- OpenAI API ключ (платный аккаунт)
-- Пакеты: `openai`, `python-dotenv`
-
-## Лицензия
-
-MIT
+Лицензия: MIT
