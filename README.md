@@ -11,6 +11,26 @@
 
 YouTube GPT Article Processor
 ```
+
+## Features
+
+- **Translation:** Full translation of English YouTube transcripts into Russian (or any other target language).
+- **Summarization:** Generates 5–7 key bullet points of the article in Russian.
+- **Long Text Support:** Automatically splits large articles into smaller parts to bypass GPT token limits.
+
+---
+
+## Setup
+
+### Installation
+
+Make sure you have Python 3.8+ installed.
+
+```bash
+pip install -r requirements.txt
+
+RU
+
 Youtube GPT Article Processor
 
 Автоматизированный инструмент для перевода и суммаризации статей и YouTube-видео
