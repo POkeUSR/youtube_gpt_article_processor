@@ -30,7 +30,7 @@ Youtube GPT Article Processor
 
 1.  Откройте в браузере: http://localhost:5000.
 2.  Вставьте ссылку на YouTube видео или текст.
-3.  Нажмите "🚀 Обработать".
+3.  Нажмите "Обработать".
 4.  По завершении скачайте готовый перевод (translated_article.txt) и краткую
     сводку (summary_article.txt).
 
